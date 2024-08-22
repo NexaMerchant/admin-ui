@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev:test": "vite --mode dev_test",
+    "dev:test": "vite --mode dev_test --host 0.0.0.0 --port 4173",
     "dev:prod": "vite --mode dev_prod",
     "build:test": "vite build --mode build_test",
     "build:prod": "vite build --mode build_prod",
