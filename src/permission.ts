@@ -29,7 +29,7 @@ router.beforeEach(async (to, from, next) => {
     } else {
       // determine whether the user has obtained his permission roles through getInfo
       const hasRoles = userStore().roles && userStore().roles.length > 0;
-      // console.log('hasRoles=', hasRoles);
+      console.log('hasRoles=', hasRoles);
       if (hasRoles) {
         next();
       } else {
@@ -42,8 +42,10 @@ router.beforeEach(async (to, from, next) => {
 
           console.log('infoRes=', infoRes);
 
-          if (infoRes.roles) {
-            roles = infoRes.roles;
+          console.log('infoRes.role=', infoRes.role);
+
+          if (infoRes.role) {
+            roles = infoRes.data.role;
           }
 
           // generate accessible routes map based on roles
