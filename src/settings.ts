@@ -9,7 +9,7 @@ interface ISettings {
 }
 
 const settings:ISettings = {
-  title: 'Vue3 Element Admin',
+  title: 'Nexa Merchant Admin',
 
   /**
    * @type {boolean} true | false
