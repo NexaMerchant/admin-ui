@@ -7,11 +7,11 @@
         <h3 class="title">User Login</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="email">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.username" placeholder="Username" name="username" type="text"
+        <el-input ref="email" v-model="loginForm.email" placeholder="email" name="email" type="text"
           tabindex="1" autocomplete="on" />
       </el-form-item>
 
@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { validUsername } from '@/utils/validate';
+import { validEmail } from '@/utils/validate';
 import { defineComponent } from 'vue';
 import SocialSign from './components/SocialSignin.vue';
 import type { FormItemRule } from 'element-plus';
@@ -68,6 +69,13 @@ export default defineComponent({
         callback();
       }
     };
+    const validateEmail: FormItemRule['validator'] = (_rule, value, callback) => {
+      if (!validEmail(value)) {
+        callback(new Error('Please enter the correct email'));
+      } else {
+        callback();
+      }
+    };
     const validatePassword: FormItemRule['validator'] = (_rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'));
@@ -77,11 +85,12 @@ export default defineComponent({
     };
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        email: 'nice.lizhi@gmail.com',
+        password: 'aYF6hQzC5kmMLfvH8sbw',
+        device_name: "admin"
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        email: [{ required: true, trigger: 'blur', validator: validateEmail }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -108,8 +117,8 @@ export default defineComponent({
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      (this.$refs.username as HTMLElement).focus();
+    if (this.loginForm.email === '') {
+      (this.$refs.email as HTMLElement).focus();
     } else if (this.loginForm.password === '') {
       (this.$refs.password as HTMLElement).focus();
     }

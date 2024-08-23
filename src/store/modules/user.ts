@@ -28,9 +28,10 @@ export default defineStore({
   actions: {
     // user login
     login(userInfo):Promise<void> {
-      const { username, password } = userInfo;
+      const { email, password, device_name } = userInfo;
       return new Promise((resolve, reject) => {
-        apiLogin({ username: username.trim(), password: password }).then(response => {
+        apiLogin({ email: email.trim(), password: password, device_name: device_name }).then(response => {
+          console.log(response);
           const { data } = response;
           this.token = data.token;
           setToken(data.token);
