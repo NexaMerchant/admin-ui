@@ -34,7 +34,7 @@ export default defineStore({
           
           const { data } = response;
 
-          console.log(data);
+          console.log("response => ", data);
 
           this.token = data.token;
           setToken(data.token);
@@ -43,7 +43,7 @@ export default defineStore({
         }).catch(error => {
 
           reject(error);
-          
+
         });
       });
     },
@@ -58,14 +58,23 @@ export default defineStore({
             reject('Verification failed, please Login again.');
           }
 
-          const { roles, name, avatar, introduction } = data;
+          const { role, name, avatar, introduction } = data.data;
+
+          //todo roles must be a non-null array
+
+          console.log("data => ", data);
+          console.log("roles => ", role);
+          console.log("name => ", name);
+          console.log("avatar => ", avatar);
+          console.log("introduction => ", introduction);
+
 
           // roles must be a non-empty array
-          if (!roles || roles.length <= 0) {
+          if (!role || role.length <= 0) {
             reject('getInfo: roles must be a non-null array!');
           }
 
-          this.roles = roles;
+          this.roles = role;
           this.name = name;
           this.avatar = avatar;
           this.introduction = introduction;
