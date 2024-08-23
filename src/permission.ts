@@ -39,6 +39,9 @@ router.beforeEach(async (to, from, next) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const infoRes = await userStore().getInfo() as any;
           let roles = [];
+
+          console.log('infoRes=', infoRes);
+
           if (infoRes.roles) {
             roles = infoRes.roles;
           }
