@@ -31,13 +31,19 @@ export default defineStore({
       const { email, password, device_name } = userInfo;
       return new Promise((resolve, reject) => {
         apiLogin({ email: email.trim(), password: password, device_name: device_name }).then(response => {
-          console.log(response);
+          
           const { data } = response;
+
+          console.log(data);
+
           this.token = data.token;
           setToken(data.token);
           resolve();
+
         }).catch(error => {
+
           reject(error);
+          
         });
       });
     },
